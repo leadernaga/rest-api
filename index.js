@@ -1,9 +1,19 @@
 const express = require('express')
+const BooksRouter = require('./routers/books.Router')
 
 const app = express()
 
 const mongoose = require('mongoose')
+const books = require('./models/books')
 require('dotenv').config()
+
+// middleweres
+
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
+// routes
+app.use('/api/books', BooksRouter)
 
 mongoose
   .connect(process.env.MONGO_URL, { useNewUrlParser: true })
